@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Documents/Programming/AndroidStudio/inventario_labs_movil/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1515" />
+        <entry key="..\:/Documents/Programming/AndroidStudio/inventario_labs_movil/app/src/main/res/font/montserrat.xml" value="0.25364583333333335" />
+        <entry key="..\:/Documents/Programming/AndroidStudio/inventario_labs_movil/app/src/main/res/font/open_sans.xml" value="0.2546875" />
         <entry key="..\:/Documents/Programming/AndroidStudio/inventario_labs_movil/app/src/main/res/layout/activity_main.xml" value="0.17300724637681159" />
         <entry key="..\:/Documents/Programming/AndroidStudio/inventario_labs_movil/app/src/main/res/layout/activity_ordenes.xml" value="0.33" />
         <entry key="..\:/Documents/Programming/AndroidStudio/inventario_labs_movil/app/src/main/res/layout/item_ordenes.xml" value="0.33" />

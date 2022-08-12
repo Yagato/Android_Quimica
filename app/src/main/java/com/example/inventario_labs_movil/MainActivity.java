@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(MainActivity.this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
         }*/
+        correoUsr = "carlos.3312@hotmail.es";
+        contraUsr = "carlos1234";
 
 
         mAuth.signInWithEmailAndPassword(correoUsr,contraUsr).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -2,9 +2,14 @@ package com.example.inventario_labs_movil;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +18,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+import com.itextpdf.text.DocumentException;
 
 public class ordenes extends AppCompatActivity {
     ArrayList<Material> material;
@@ -21,11 +35,15 @@ public class ordenes extends AppCompatActivity {
     Button btn_agregar, btn_editar, btn_elim, btn_generar;
     RecyclerView recyclerView_ordenes;
     AdaptadorMaterial ap;
+    private static final int PERMISSION_REQUEST_CODE = 200;
+    Bitmap bmpHeader, bmpFooter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordenes);
+        bmpHeader = BitmapFactory.decodeResource(getResources(), R.drawable.header);
+        bmpFooter = BitmapFactory.decodeResource(getResources(), R.drawable.footer);
         btn_agregar = (Button) findViewById(R.id.btn_agregar);
         //btn_editar = (Button) findViewById(R.id.btn_editar);
         et1=findViewById(R.id.et1);
@@ -72,6 +90,65 @@ public class ordenes extends AppCompatActivity {
         }
         else
             Toast.makeText(this,"No existe ",Toast.LENGTH_SHORT).show();
+    }
+
+    public void generarPDF(View view) throws DocumentException, IOException {
+        if(material.size() < 1){
+            System.out.println("Empty list");
+            return;
+        }
+
+        if(checkPermisssion()){
+            Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            String[] laboratorio = new String[material.size()];
+            String[] reactivo = new String[material.size()];
+            String[] cantidad = new String[material.size()];
+
+            for(int i = 0; i < material.size(); i++){
+                laboratorio[i] = material.get(i).getLaboratorio();
+                reactivo[i] = material.get(i).getNombre();
+                cantidad[i] = material.get(i).getCantidad();
+            }
+
+            //Bitmap scaledHeader = Bitmap.createScaledBitmap(bmpHeader, 200, 100, false);
+            //Bitmap scaledFooter = Bitmap.createScaledBitmap(bmpFooter, 500, 100, false);
+
+            PdfController pdf = new PdfController(laboratorio, reactivo, cantidad, bmpHeader, bmpFooter);
+            pdf.generatePDF();
+        }
+        else{
+            requestPermission();
+        }
+    }
+
+    private boolean checkPermisssion(){
+        int permission1 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+        int permission2 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+        return permission1 == PackageManager.PERMISSION_GRANTED && permission2 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermission(){
+        ActivityCompat.requestPermissions(this,
+                new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE},
+                PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0) {
+                boolean writeStorage = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                boolean readStorage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+                if (writeStorage && readStorage) {
+                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        }
     }
 
     public void mostrar(int pos)
