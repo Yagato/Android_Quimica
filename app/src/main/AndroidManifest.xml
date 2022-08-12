@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Inventario_labs_movil">
         <activity
+            android:name=".PantallaJefa"
+            android:exported="false"
+            android:label="@string/title_activity_pantalla_jefa"
+            android:theme="@style/Theme.Inventario_labs_movil.NoActionBar" />
+        <activity
             android:name=".agregar_inv"
             android:exported="false" />
         <activity

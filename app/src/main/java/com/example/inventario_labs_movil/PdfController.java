@@ -30,6 +30,7 @@ public class PdfController {
     private String[] laboratorio;
     private String[] reactivo;
     private String[] cantidad;
+    private String path = Environment.getExternalStorageDirectory().getPath() + "/TEST.pdf";
 
     public PdfController(String[] laboratorio, String[] reactivo, String[] cantidad,
                          Bitmap header, Bitmap footer){
@@ -39,8 +40,6 @@ public class PdfController {
         this.bmpHeader = header;
         this.bmpFooter = footer;
     }
-
-    private String path = Environment.getExternalStorageDirectory().getPath() + "/TEST.pdf";
 
     public void generatePDF() throws IOException, DocumentException {
         Document document = new Document();
