@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "976313127121",
+    "firebase_url": "https://inventariolabs-default-rtdb.firebaseio.com",
+    "project_id": "inventariolabs",
+    "storage_bucket": "inventariolabs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976313127121:android:52c27b0874181ce2bd75f0",
+        "android_client_info": {
+          "package_name": "com.example.inventario_labs_movil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976313127121-561sntmc529c6cfbn6s9pdgk89o1k9sa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXsGVdUWeDbG8S2iRIWZnGJZgwmgbsosU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976313127121-561sntmc529c6cfbn6s9pdgk89o1k9sa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
