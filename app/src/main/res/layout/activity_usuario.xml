@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <EditText
+    <!-- <EditText
         android:id="@+id/etCorreo"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -24,21 +24,48 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_rest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" /> -->
 
-    <Button
-        android:id="@+id/btn_rest"
+    <EditText android:id="@+id/Edt_Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="77dp"
-        android:layout_marginEnd="77dp"
-        android:layout_marginBottom="304dp"
+        android:hint="Correo electronico"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp" />
+
+    <EditText android:id="@+id/Edt_PassActual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Contraseña Actual"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/Edt_Email"/>
+
+    <EditText android:id="@+id/Edt_NuevoPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Nueva Contraseña"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/Edt_PassActual"/>
+
+    <EditText android:id="@+id/Edt_NuevoPassConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Confirmar Contraseña"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:layout_below="@+id/Edt_NuevoPass"/>
+
+    <Button
+        android:id="@+id/Btn_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:backgroundTint="@color/black"
         android:text="Restablecer contraseña"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCorreo" />
+        android:layout_below="@+id/Edt_NuevoPassConfirm"
+        android:textSize="14dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

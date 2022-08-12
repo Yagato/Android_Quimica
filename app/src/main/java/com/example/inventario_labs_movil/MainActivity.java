@@ -35,9 +35,8 @@ public class MainActivity extends AppCompatActivity {
     Button btn_login;
     EditText correo, contra;
     FirebaseAuth mAuth;
-    private FirebaseFirestore mfirestore;
+    //private FirebaseFirestore mfirestore;
     private Usuarios user;
-    boolean result = false;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         contra = findViewById(R.id.Contra);
         btn_login = findViewById(R.id.btn_login);
 
-        mfirestore = FirebaseFirestore.getInstance();
+        //firestore = FirebaseFirestore.getInstance();
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,16 +86,20 @@ public class MainActivity extends AppCompatActivity {
                                         return;
                                     }
 
+                                    Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+
                                     if(user.getPrivilegio().equals("consulta")) {
-                                        Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MainActivity.this, PantallaJefa.class));
-                                        finish();
+                                        //finish();
                                     }
                                     else if(user.getPrivilegio().equals("edicion")) {
-                                        Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MainActivity.this, hogar.class));
-                                        finish();
+                                        //finish();
                                     }
+
+                                    finish();
                                 }
                             });
                 }
