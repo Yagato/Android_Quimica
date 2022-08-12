@@ -1,8 +1,6 @@
 package com.example.inventario_labs_movil;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.os.Environment;
 
 import com.itextpdf.text.BaseColor;
@@ -17,7 +15,6 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
@@ -26,7 +23,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 
 public class PdfController {
 
@@ -107,12 +103,12 @@ public class PdfController {
     }
 
     public PdfPCell createTitleCell() {
-        Font font1 = generateFont();
+        Font font1 = new Font();
         font1.setStyle(Font.BOLD);
         font1.setSize(10);
         font1.setColor(BaseColor.GRAY);
 
-        Font font2 = generateFont();
+        Font font2 = new Font();
         font2.setStyle(Font.BOLD);
         font2.setSize(8);
         font2.setColor(BaseColor.GRAY);
@@ -158,7 +154,7 @@ public class PdfController {
         table.setSplitLate(false);
         table.setSplitRows(true);
 
-        Font fontHeader = generateFont();
+        Font fontHeader = new Font();
         fontHeader.setSize(13);
         fontHeader.setStyle(Font.BOLD);
 
@@ -186,15 +182,16 @@ public class PdfController {
         return table;
     }
 
-    public Font generateFont() {
+    /*public Font generateFont() {
         BaseFont baseFont = null;
         try{
-            baseFont = BaseFont.createFont("res/font/montserrat_light.ttf", "UTF-8", BaseFont.EMBEDDED);
+            baseFont = BaseFont.createFont("montserrat_light.ttf",
+                    BaseFont.IDENTITY_H, true, false, fontData, null);
         }
         catch(Exception e){
             e.printStackTrace();
         }
         //FontFactory.register(font_path.toString(), "montserrat_light");
         return new Font(baseFont);
-    }
+    }*/
 }

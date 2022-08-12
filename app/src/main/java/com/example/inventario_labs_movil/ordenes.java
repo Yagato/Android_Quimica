@@ -18,9 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
@@ -109,9 +107,6 @@ public class ordenes extends AppCompatActivity {
                 reactivo[i] = material.get(i).getNombre();
                 cantidad[i] = material.get(i).getCantidad();
             }
-
-            //Bitmap scaledHeader = Bitmap.createScaledBitmap(bmpHeader, 200, 100, false);
-            //Bitmap scaledFooter = Bitmap.createScaledBitmap(bmpFooter, 500, 100, false);
 
             PdfController pdf = new PdfController(laboratorio, reactivo, cantidad, bmpHeader, bmpFooter);
             pdf.generatePDF();
