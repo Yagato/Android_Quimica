@@ -1,6 +1,7 @@
 package com.example.inventario_labs_movil;
 
 import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.os.Environment;
 
 import com.itextpdf.text.BaseColor;
@@ -21,6 +22,7 @@ import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -30,20 +32,30 @@ public class PdfController {
     private String[] laboratorio;
     private String[] reactivo;
     private String[] cantidad;
-    private String path = Environment.getExternalStorageDirectory().getPath() + "/TEST.pdf";
+    //private String path = Environment.getExternalStorageDirectory().getPath() + "/TEST.pdf";
+    private String path = "";
 
     public PdfController(String[] laboratorio, String[] reactivo, String[] cantidad,
-                         Bitmap header, Bitmap footer){
+                         Bitmap header, Bitmap footer, String path){
         this.laboratorio = laboratorio;
         this.reactivo = reactivo;
         this.cantidad = cantidad;
         this.bmpHeader = header;
         this.bmpFooter = footer;
+        this.path = path;
     }
 
     public void generatePDF() throws IOException, DocumentException {
+        File dir = new File(path);
+
+        if(!dir.exists()){
+            dir.mkdir();
+
+        }
+        File file = new File(dir, "ordenes.pdf");
+
         Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(path));
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
 
         writer.setPageEvent(new PdfPageEventHelper() {
             public void onEndPage(PdfWriter writer, Document document){

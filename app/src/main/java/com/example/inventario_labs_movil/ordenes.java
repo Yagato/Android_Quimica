@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -35,11 +38,20 @@ public class ordenes extends AppCompatActivity {
     AdaptadorMaterial ap;
     private static final int PERMISSION_REQUEST_CODE = 200;
     Bitmap bmpHeader, bmpFooter;
+    String path = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordenes);
+
+        //path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PDF";
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+            path = this.getExternalFilesDir(null).getAbsolutePath() + "/PDF";
+        else
+            path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PDF";
+
         bmpHeader = BitmapFactory.decodeResource(getResources(), R.drawable.header);
         bmpFooter = BitmapFactory.decodeResource(getResources(), R.drawable.footer);
         btn_agregar = (Button) findViewById(R.id.btn_agregar);
@@ -97,7 +109,6 @@ public class ordenes extends AppCompatActivity {
         }
 
         if(checkPermisssion()){
-            Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
             String[] laboratorio = new String[material.size()];
             String[] reactivo = new String[material.size()];
             String[] cantidad = new String[material.size()];
@@ -108,8 +119,11 @@ public class ordenes extends AppCompatActivity {
                 cantidad[i] = material.get(i).getCantidad();
             }
 
-            PdfController pdf = new PdfController(laboratorio, reactivo, cantidad, bmpHeader, bmpFooter);
+            System.out.println(path);
+            PdfController pdf = new PdfController(laboratorio, reactivo, cantidad, bmpHeader, bmpFooter, path);
             pdf.generatePDF();
+            Toast.makeText(this, "PDF file created successfully", Toast.LENGTH_SHORT).show();
+            //MediaScannerConnection.scanFile(this, new String[]{path}, null, null);
         }
         else{
             requestPermission();
