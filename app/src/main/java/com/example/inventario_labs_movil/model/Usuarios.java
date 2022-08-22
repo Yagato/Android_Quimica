@@ -2,16 +2,24 @@ package com.example.inventario_labs_movil.model;
 
 public class Usuarios {
 
-    private String contraseña, correo, privilegio;
+    private String nombre, contraseña, correo, privilegio;
 
     public Usuarios() {
 
     }
 
-    public Usuarios(String contraseña, String correo, String privilegio) {
+    public Usuarios(String nombre, String contraseña, String correo, String privilegio) {
         this.contraseña = contraseña;
         this.correo = correo;
         this.privilegio = privilegio;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setContraseña(String contraseña) {

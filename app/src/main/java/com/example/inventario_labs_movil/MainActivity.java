@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
                                     for(DocumentSnapshot doc : value){
                                         user = doc.toObject(Usuarios.class);
                                         System.out.println(doc.getId() + " => " + user.getCorreo() + " "
-                                                + user.getContraseña() + " " + user.getPrivilegio());
+                                                + user.getNombre() + " " + user.getContraseña() +
+                                                " " + user.getPrivilegio());
                                     }
 
                                     if(user == null){
@@ -88,12 +89,12 @@ public class MainActivity extends AppCompatActivity {
 
                                     Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
 
-                                    if(user.getPrivilegio().equals("consulta")) {
+                                    if(user.getPrivilegio().equals("Consultor")) {
                                         //Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MainActivity.this, PantallaJefa.class));
                                         //finish();
                                     }
-                                    else if(user.getPrivilegio().equals("edicion")) {
+                                    else if(user.getPrivilegio().equals("Editor")) {
                                         //Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MainActivity.this, hogar.class));
                                         //finish();

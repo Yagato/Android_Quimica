@@ -1,121 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondohd"
-    tools:context=".ordenes">
+    android:background="@drawable/fondohd">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_ordenes"
-        android:layout_width="359dp"
-        android:layout_height="273dp"
+        android:layout_width="383dp"
+        android:layout_height="329dp"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="230dp"
         android:layout_marginEnd="29dp"
-        android:layout_marginBottom="214dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="184dp" />
 
     <Button
         android:id="@+id/btn_generar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="547dp"
-        android:layout_marginEnd="137dp"
-        android:layout_marginBottom="136dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_elim"
         android:backgroundTint="#000000"
-        android:text="generar PDF"
         android:onClick="generarPDF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:text="generar PDF" />
 
     <EditText
         android:id="@+id/et1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="43dp"
-        android:layout_marginEnd="178dp"
-        android:layout_marginBottom="643dp"
         android:ems="10"
         android:hint="Nombre"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="25dp" />
 
     <EditText
         android:id="@+id/et3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="156dp"
-        android:layout_marginEnd="178dp"
-        android:layout_marginBottom="530dp"
+        android:layout_marginStart="60dp"
         android:ems="10"
         android:hint="Laboratorio"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="25dp" />
 
     <Button
         android:id="@+id/btn_agregar"
-        android:layout_width="wrap_content"
+        android:layout_width="122dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="256dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="51dp"
-        android:layout_marginBottom="643dp"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentLeft="true"
+
+        android:layout_marginTop="550dp"
         android:backgroundTint="#000000"
         android:onClick="agregar"
-        android:text="Agregar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Agregar" />
 
     <Button
         android:id="@+id/btn_elim"
-        android:layout_width="wrap_content"
+        android:layout_width="122dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="256dp"
-        android:layout_marginTop="99dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginBottom="584dp"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="550dp"
+
         android:backgroundTint="#000000"
         android:onClick="eliminar"
-        android:text="eliminar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="eliminar" />
+
+    <Button
+        android:id="@+id/btn_edit"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="550dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#000000"
+        android:onClick="editar"
+        android:text="Editar" />
 
     <EditText
         android:id="@+id/et2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="99dp"
-        android:layout_marginEnd="178dp"
-        android:layout_marginBottom="587dp"
+        android:layout_marginStart="60dp"
         android:ems="10"
         android:hint="Cantidad"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="25dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

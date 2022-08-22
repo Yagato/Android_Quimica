@@ -14,6 +14,7 @@ import android.media.MediaScannerConnection;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,12 +40,13 @@ public class ordenes extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 200;
     Bitmap bmpHeader, bmpFooter;
     String path = "";
+    String nombre = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordenes);
-
+        this.setTitle("Ordenes");
         //path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/PDF";
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
@@ -55,7 +57,7 @@ public class ordenes extends AppCompatActivity {
         bmpHeader = BitmapFactory.decodeResource(getResources(), R.drawable.header);
         bmpFooter = BitmapFactory.decodeResource(getResources(), R.drawable.footer);
         btn_agregar = (Button) findViewById(R.id.btn_agregar);
-        //btn_editar = (Button) findViewById(R.id.btn_editar);
+        //btn_editar = (Button) findViewById(R.id.btn_edit);
         et1=findViewById(R.id.et1);
         et2=findViewById(R.id.et2);
         et3=findViewById(R.id.et3);
@@ -72,13 +74,35 @@ public class ordenes extends AppCompatActivity {
 
     public void agregar(View v)
     {
-        Material material1=new Material(et1.getText().toString(),et2.getText().toString(),et3.getText().toString());
-        material.add(material1);
-        et1.setText("");
-        et2.setText("");
-        et3.setText("");
-        ap.notifyDataSetChanged();
-        recyclerView_ordenes.scrollToPosition(material.size()-1);
+        if(et1.getText().toString().isEmpty() && et2.getText().toString().isEmpty() && et3.getText().toString().isEmpty()){
+            Toast.makeText(ordenes.this, "Ingresa los datos", Toast.LENGTH_SHORT).show();
+        }else{
+            Material material1=new Material(et1.getText().toString(),et2.getText().toString(),et3.getText().toString());
+            material.add(material1);
+            et1.setText("");
+            et2.setText("");
+            et3.setText("");
+            ap.notifyDataSetChanged();
+            recyclerView_ordenes.scrollToPosition(material.size()-1);
+        }
+
+    }
+
+    public void editar(View v){
+        for(int i = 0; i < material.size(); i++){
+            if(material.get(i).getNombre().equals(nombre)){
+                material.set(i, new Material(et1.getText().toString().trim(),
+                        et2.getText().toString().trim(),
+                        et3.getText().toString().trim()));
+                et1.setText("");
+                et2.setText("");
+                et3.setText("");
+                ap.notifyDataSetChanged();
+                Toast.makeText(this,"Editado correctamente",Toast.LENGTH_SHORT).show();
+                nombre = "";
+                break;
+            }
+        }
     }
 
     public void eliminar(View v)
@@ -96,15 +120,15 @@ public class ordenes extends AppCompatActivity {
             et2.setText("");
             et3.setText("");
             ap.notifyDataSetChanged();
-            Toast.makeText(this,"Se elimino el material",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Se elimino correctamente",Toast.LENGTH_SHORT).show();
         }
         else
-            Toast.makeText(this,"No existe ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"No existe el material/reactivo solicitado",Toast.LENGTH_SHORT).show();
     }
 
     public void generarPDF(View view) throws DocumentException, IOException {
         if(material.size() < 1){
-            System.out.println("Empty list");
+            Toast.makeText(ordenes.this, "Lista vacia", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -122,8 +146,7 @@ public class ordenes extends AppCompatActivity {
             System.out.println(path);
             PdfController pdf = new PdfController(laboratorio, reactivo, cantidad, bmpHeader, bmpFooter, path);
             pdf.generatePDF();
-            Toast.makeText(this, "PDF file created successfully", Toast.LENGTH_SHORT).show();
-            //MediaScannerConnection.scanFile(this, new String[]{path}, null, null);
+            Toast.makeText(this, "Archivo PDF creado exitosamente", Toast.LENGTH_SHORT).show();
         }
         else{
             requestPermission();
@@ -151,9 +174,9 @@ public class ordenes extends AppCompatActivity {
                 boolean readStorage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
                 if (writeStorage && readStorage) {
-                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Permiso concedido", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Permiso denegado", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -165,7 +188,7 @@ public class ordenes extends AppCompatActivity {
         et1.setText(material.get(pos).getNombre());
         et2.setText(material.get(pos).getCantidad());
         et3.setText(material.get(pos).getLaboratorio());
-
+        nombre = et1.getText().toString().trim();
     }
 
     private class AdaptadorMaterial extends RecyclerView.Adapter<AdaptadorMaterial.AdaptadorPersonaHolder> {
@@ -185,6 +208,7 @@ public class ordenes extends AppCompatActivity {
         public int getItemCount() {
             return material.size();
         }
+
 
         class AdaptadorPersonaHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             TextView nombre,cantidad,laboratorio;
